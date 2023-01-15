@@ -10,7 +10,6 @@ require('dotenv').config();
 const express = require('express');
 require('dotenv').config();
 const cors = require('cors');
-const { request } = require('express');
 // let data = require('./data/weather.json');
 
 //ONCE EXPRESS IS IN; USE IT. 
@@ -45,13 +44,14 @@ app.get('/movies', async (request, response, next)=>{
 
     let url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_MOVIE}&language=en-US&query=${cityName}&page=1&include_adult=false`;
 
-    let movieDataWeatherbit = await axios.get(url);
-    let parsedMovieData = movieDataWeatherbit.data;
-    let resultsArr= parsedMovieData.results.map(movieObj=> new Movies(movieObj))
+    let movieDataFromWeatherbit = await axios.get(url);
+    let parsedMovieData = movieDataFromWeatherbit.data;
+    let resultsArr= parsedMovieData.results.map(movieObj=> new Movies(movieObj));
     
     response.status(200).send(resultsArr);
     
   } catch (error) {
+    next(error);
     
   }
 
@@ -63,16 +63,12 @@ app.get('/weather', async (request,response,next)=>{
     let lat=request.query.lat;
     let lon= request.query.lon;
 
-    let city=request.query.city_name;
+    let url = `https://api.weatherbit.io/v2.0/forecast/daily?key=${process.env.WEATHER_API_KEY}&lat=${lat}&lon=${lon}`;
+    let WeatherDataFromWeatherbit = await axios.get(url);
 
-    let url=`https://api.weatherbit.io/v2.0/forecast/daily?key=${process.env.REACT_APP_WEATHER}&lat=${lat}&lon=${lon}`;
+    let parsedWeatherData=WeatherDataFromWeatherbit.data;
 
-
-    letWeatherDataWeatherbit = await axios.get(url);
-
-    let parsedWeatherData=letWeatherDataWeatherbit.data;
-
-    let groomedData= parsedWeatherData.data.map(dayObj=>new Forecast(dayObj));
+    let weatherData= parsedWeatherData.data.map(dayObj=>new Forecast(dayObj));
 
     response.status(200).send(weatherData);
 
