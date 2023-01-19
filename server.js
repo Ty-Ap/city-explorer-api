@@ -15,9 +15,9 @@ app.use(cors());
 
 
 
-const PORT=process.env.PORT || 3002;
+const PORT=process.env.SERVER_PORT || 3002;
 
-app.listen(PORT, () => console.log(`WE ARE RUNNING ON ${PORT}`));
+
 
 
 
@@ -31,7 +31,7 @@ app.get('/movies', async (request, response, next)=>{
   try {
     let cityName = request.query.searchQuery;
 
-    let url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_MOVIE}&language=en-US&query=${cityName}&page=1&include_adult=false`;
+    let url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&language=en-US&query=${cityName}&page=1&include_adult=false`;
 
     let movieDataFromWeatherbit = await axios.get(url);
     let parsedMovieData = movieDataFromWeatherbit.data;
@@ -55,9 +55,9 @@ app.get('/weather', async (request,response,next)=>{
     let url = `https://api.weatherbit.io/v2.0/forecast/daily?key=${process.env.WEATHER_API_KEY}&lat=${lat}&lon=${lon}`;
     let WeatherDataFromWeatherbit = await axios.get(url);
 
-    let parsedWeatherData=WeatherDataFromWeatherbit.data;
+    let parsedWeatherData=WeatherDataFromWeatherbit.data.data;
 
-    let weatherData= parsedWeatherData.data.map(dayObj=>new Forecast(dayObj));
+    let weatherData= parsedWeatherData.map(dayObj=>new Forecast(dayObj));
 
     response.status(200).send(weatherData);
 
@@ -98,12 +98,16 @@ class Movies{
 
 
 //ERRORHANDLING  COMES FROM EXPRESS DOCS
-app.use((error, request, response, next)=>{
-  response.status(500).send(error.message);
-});
 
-app.get('*', (request,response)=>{
-  response.status(404).send(error.message);
-});
+// app.get('*', (request,response)=>{
+//   response.status(404).send(error.message);
+// });
+
+// app.use((error, request, response, next)=>{
+//   response.status(500).send(error.message);
+// });
+
+
 //SERVER STARTS
 
+app.listen(PORT, () => console.log(`WE ARE RUNNING ON ${PORT}`));
