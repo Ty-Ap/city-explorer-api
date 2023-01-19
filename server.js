@@ -1,44 +1,30 @@
 'use strict';
 
-const axios = require('axios');
 
-console.log('i eat children');
 
-require('dotenv').config();
-//REQUIRES//
 
 const express = require('express');
 require('dotenv').config();
 const cors = require('cors');
+const axios = require('axios');
 
-
-// let data = require('./data/weather.json');
-
-//ONCE EXPRESS IS IN; USE IT. 
-// app =server
 
 const app = express();
-
-
-// MIDDLEWARE GOES HERE, AFTER APP
 
 app.use(cors());
 
 
 
-// DEFINE PORT FOR SERVER
-
 const PORT=process.env.PORT || 3002;
+app.listen(PORT, () => console.log(`WE ARE RUNNING ON ${PORT}`));
+
 
 
 
 //ENDPOINTS AND PROOF OF LIFE
 //FIRST ARG= ENDPOINT IN '' SECOND IS CALLBACK
 //CALLBACK TAKES IN REQUEST AND RESPONSE
-app.get('/', (request, response)=> {
-  response.status(200).send('kronk is god');
 
-});
 
 app.get('/movies', async (request, response, next)=>{
   try {
@@ -120,4 +106,3 @@ app.use((error, request,response,next)=>{
 
 //SERVER STARTS
 
-app.listen(PORT, () => console.log(`WE ARE RUNNING ON ${PORT}`));
