@@ -62,8 +62,15 @@ app.get('/weather', async (request,response,next)=>{
     response.status(200).send(weatherData);
 
   }  catch(error) {
-    next(error);
+    next(error)
     
+    app.get('*', (request,response)=>{
+      response.status(404).send(error.message);
+    });
+    
+    app.use((error, request, response, next)=>{
+      response.status(500).send(error.message);
+    });
   }
 
 });
@@ -99,13 +106,7 @@ class Movies{
 
 //ERRORHANDLING  COMES FROM EXPRESS DOCS
 
-app.get('*', (request,response)=>{
-  response.status(404).send(error.message);
-});
 
-app.use((error, request, response, next)=>{
-  response.status(500).send(error.message);
-});
 
 
 //SERVER STARTS
