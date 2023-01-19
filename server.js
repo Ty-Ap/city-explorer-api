@@ -99,13 +99,13 @@ class Movies{
 
 //ERRORHANDLING  COMES FROM EXPRESS DOCS
 
-// app.get('*', (request,response)=>{
-//   response.status(404).send(error.message);
-// });
+app.get('*', (request,response)=>{
+  response.status(404).send(error.message);
+});
 
-// app.use((error, request, response, next)=>{
-//   response.status(500).send(error.message);
-// });
+app.use((error, request, response, next)=>{
+  response.status(500).send(error.message);
+});
 
 
 //SERVER STARTS
