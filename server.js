@@ -89,13 +89,7 @@ class Movies{
   }
 }
 //CATCH ALL ENDPOINT, MUST BE LAST
-app.get('*', (request, response) => {
-  response.status(404).send('This page does not exist');
-});
 
-app.use((error, request, response, next) => {
-  response.status(500).send(error.message);
-});
 
 //ERRORHANDLING  COMES FROM EXPRESS DOCS
 
