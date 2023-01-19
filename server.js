@@ -40,7 +40,8 @@ app.get('/movies', async (request, response, next)=>{
     response.status(200).send(resultsArr);
     
   } catch (error) {
-    next(error);
+    next(error)
+
     
   }
 
@@ -53,24 +54,17 @@ app.get('/weather', async (request,response,next)=>{
     let lon= request.query.lon;
 
     let url = `https://api.weatherbit.io/v2.0/forecast/daily?key=${process.env.WEATHER_API_KEY}&lat=${lat}&lon=${lon}`;
+    console.log('more here ');
     let WeatherDataFromWeatherbit = await axios.get(url);
 
-    let parsedWeatherData=WeatherDataFromWeatherbit.data.data;
-
+    let parsedWeatherData=WeatherDataFromWeatherbit.data;
     let weatherData= parsedWeatherData.map(dayObj=>new Forecast(dayObj));
-
+    
     response.status(200).send(weatherData);
 
   }  catch(error) {
     next(error)
-    
-    app.get('*', (request,response)=>{
-      response.status(404).send(error.message);
-    });
-    
-    app.use((error, request, response, next)=>{
-      response.status(500).send(error.message);
-    });
+  
   }
 
 });
