@@ -16,6 +16,7 @@ app.use(cors());
 
 
 const PORT=process.env.PORT || 3002;
+
 app.listen(PORT, () => console.log(`WE ARE RUNNING ON ${PORT}`));
 
 
@@ -93,16 +94,16 @@ class Movies{
 }
 //CATCH ALL ENDPOINT, MUST BE LAST
 
-app.get('*', (request,response)=>{
-  response.status(404).send('why are you here? this page does not exist. stop trying to break things');
-});
 
 
 
 //ERRORHANDLING  COMES FROM EXPRESS DOCS
-app.use((error, request,response,next)=>{
-  response.status('500').send(error.message);
+app.use((error, request, response, next)=>{
+  response.status(500).send(error.message);
 });
 
+app.get('*', (request,response)=>{
+  response.status(404).send(error.message);
+});
 //SERVER STARTS
 
