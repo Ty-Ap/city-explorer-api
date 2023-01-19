@@ -64,3 +64,5 @@ Start time: 4pm
 Finish time: 7:30
 
 Actual time needed to complete: done concurrently with other updates
+
+![more complex whiteboard](wrrc.png)
