@@ -10,6 +10,8 @@ require('dotenv').config();
 const express = require('express');
 require('dotenv').config();
 const cors = require('cors');
+
+
 // let data = require('./data/weather.json');
 
 //ONCE EXPRESS IS IN; USE IT. 
