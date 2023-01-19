@@ -38,11 +38,8 @@ app.get('/movies', async (request, response, next)=>{
     let resultsArr= parsedMovieData.results.map(movieObj=> new Movies(movieObj));
     
     response.status(200).send(resultsArr);
-    
   } catch (error) {
     next(error)
-
-    
   }
 
 });
@@ -54,19 +51,17 @@ app.get('/weather', async (request,response,next)=>{
     let lon= request.query.lon;
 
     let url = `https://api.weatherbit.io/v2.0/forecast/daily?key=${process.env.WEATHER_API_KEY}&lat=${lat}&lon=${lon}`;
-    console.log('more here ');
+    
     let WeatherDataFromWeatherbit = await axios.get(url);
 
     let parsedWeatherData=WeatherDataFromWeatherbit.data;
-    let weatherData= parsedWeatherData.map(dayObj=>new Forecast(dayObj));
+    let weatherData= parsedWeatherData.data.map(dayObj=>new Forecast(dayObj));
     
     response.status(200).send(weatherData);
 
-  }  catch(error) {
+  } catch(error) {
     next(error)
-  
   }
-
 });
 
 
@@ -94,9 +89,13 @@ class Movies{
   }
 }
 //CATCH ALL ENDPOINT, MUST BE LAST
+app.get('*', (request, response) => {
+  response.status(404).send('This page does not exist');
+});
 
-
-
+app.use((error, request, response, next) => {
+  response.status(500).send(error.message);
+});
 
 //ERRORHANDLING  COMES FROM EXPRESS DOCS
 
