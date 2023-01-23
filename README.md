@@ -2,21 +2,23 @@
 
 ![request cycle graphic](request-cycle.png);
 
-# Project Name
-
-**Author**: Your Name Goes Here
-**Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
+**Author**: Ty Aponte
+**Version**: 1.0.3  
 
 ## Overview
-<!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for this class. (i.e. What's your problem domain?) -->
+
+search a city, callout to external apis , and retrieve different kinds of data from external sources, while routing through local server.
 
 ## Getting Started
-<!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
+
+import and fiddle with cors,dotenv, and express. secure api keys, have a servicable knowledge of React and componentizations/ modularization.
 
 ## Architecture
-<!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
+
+Use cors middleware to route calls, dotenv to hide api keys and other secret/env variables. express server service.
 
 ## Change Log
+
 1/18 7:00 hopefully functional call to backend server. build out movie and weather objects and constructors. imported keys.
 
 ## Credit and Collaborations
@@ -66,3 +68,10 @@ Finish time: 7:30
 Actual time needed to complete: done concurrently with other updates
 
 ![more complex whiteboard](wrrc.png)
+
+Name of Feature : modularized routes for backend.
+time Est: 1hrs
+start time 5:40
+finish time 6:15
+
+time needed: 35 min
